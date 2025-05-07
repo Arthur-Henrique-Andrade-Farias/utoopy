@@ -1,0 +1,40 @@
+<template >
+    <div class="register-page">
+      <register-modal class="register-modal"/>
+    </div>
+  </template>
+  
+  <script>
+  import registerModal from '@/components/registerModal.vue'
+  
+  export default {
+    name: 'RegisterPage',
+    components: {
+        registerModal
+    }
+  }
+  </script>
+
+  <style>
+    html, body, #app {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+    }
+    .register-page {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #9188C2;
+      margin-bottom: 100px;
+      width: 100%;
+      height: 100%;
+    }
+    .register-modal {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin-bottom: 100px;
+    }
+</style>
