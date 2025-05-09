@@ -140,14 +140,19 @@ button {
 
 @media (max-width: 1024px) {
   .login-modal {
-    width: 90%;
+    width: 80%;
     height: auto;
     padding: 30px;
   }
 
-  input,
-  button {
+  input
+   {
     width: 90%;
+    font-size: 24px;
+  }
+
+  button {
+    width: 50%;
     font-size: 24px;
   }
 

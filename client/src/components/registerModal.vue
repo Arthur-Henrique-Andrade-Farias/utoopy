@@ -128,14 +128,20 @@ button {
 
 @media (max-width: 1024px) {
   .register-modal {
-    width: 90%;
+    width: 80%;
     height: auto;
     padding: 30px;
   }
 
   input,
-  button {
+   {
     width: 90%;
+    font-size: 24px;
+  }
+
+  button {
+    width: 70%;
+    height: 70px;
     font-size: 24px;
   }
 
@@ -150,6 +156,13 @@ button {
 }
 
 @media (max-width: 650px) {
+
+  .person-icon {
+    margin-top: 80px;
+    width: 50px;
+    height: 50px;
+  }
+
   .register-modal {
     width: 70%;
     height: 50%;

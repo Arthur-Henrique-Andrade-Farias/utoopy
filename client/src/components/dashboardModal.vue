@@ -191,7 +191,7 @@
   /* Responsividade */
   @media (max-width: 1024px) {
     .dashboard-modal {
-      width: 100%;
+      width: 80%;
       height: auto;
     }
   }

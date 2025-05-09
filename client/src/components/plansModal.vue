@@ -51,13 +51,19 @@ export default {
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
+
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* só scroll vertical */
+}
 .plans-modal {
     background-color: #f2f2f2;
     border: 2px solid #ccc;
     border-radius: 30px;
     padding: 20px;
-    width: 1200px;
-    height: 1200px;
+    width: 700px;
+    height: 500px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -66,17 +72,17 @@ export default {
 
 .plans-modal h1 {
     margin-top: 40px;
-    font-size: 60px;
+    font-size: 32px;
     color: #333;
     font-weight: bold;
     text-align: center;
     font-family: 'Roboto', sans-serif;
-    margin-bottom: -5px; /* Reduced spacing */
+    margin-bottom: -10px;
 }
 
 .plans-modal h2 {
-    margin-bottom: 20px;
-    font-size: 24px;
+    margin-bottom: 80px;
+    font-size: 18px;
     color: #333;
     text-align: center;
     font-weight: normal;
@@ -95,16 +101,15 @@ export default {
     align-items: center;
     justify-content: flex-end;
     width: 30%;
-    height: 700px;
+    height: 300px;
     border: 1px solid #ccc;
     border-radius: 10px;
     padding: 10px;
     background-color: #fff;
-    margin-bottom: 100px;
 }
 
 .container h2 {
-    font-size: 42px;
+    font-size: 24px;
     color: #333;
     font-weight: bold;
     text-align: center;
@@ -114,34 +119,33 @@ export default {
 
 .container .Bronze {
     color: #CD7F32;
-    font-size: 60px;
-    margin-bottom: 10px; /* Reduced spacing */
+    font-size: 24px;
+    margin-bottom: -10px; /* Reduced spacing */
 }
 
 .container .Silver {
     color: #C0C0C0;
-    font-size: 60px;
-    margin-bottom: 10px; /* Reduced spacing */
+    font-size: 24px;
+    margin-bottom: -10px; /* Reduced spacing */
 }
 
 .container .Gold {
     color: #FFD700;
-    font-size: 60px;
-    margin-bottom: 10px; /* Reduced spacing */
+    font-size: 24px;
+    margin-bottom: -10px; /* Reduced spacing */
 }
 
 .container h3 {
-    font-size: 32px;
+    font-size: 18px;
     color: #333;
     font-weight: bold;
     text-align: center;
     font-family: 'Roboto', sans-serif;
-    margin-bottom: 8px; /* Reduced spacing */
+    margin-bottom: -10px; /* Reduced spacing */
 }
 
 .container h4 {
-    font-size: 18px;
-    margin-bottom: 100px;
+    font-size: 12px;
     color: #333;
     font-weight: normal;
     text-align: center;
@@ -165,9 +169,10 @@ button {
 }
 
 .payment-image {
-    width: 100px;
-    height: 100px;
-    margin-bottom: 20px;
+    width: 30px;
+    height: 30px;
+    margin-top: -80px;
+    margin-bottom: 10px;
     border: 20px solid white;
     background-color: white;
     border-radius: 50%;
@@ -184,7 +189,7 @@ h3.advise {
 
 @media (max-width: 1024px) {
   .plans-modal {
-    width: 90%;
+    width: 80%;
     height: auto;
     padding: 30px;
   }
@@ -196,7 +201,7 @@ h3.advise {
   }
 
   .plans-modal h2 {
-    font-size: 32px;
+    font-size: 20px;
   }
 
   .padlock-icon {
@@ -206,32 +211,86 @@ h3.advise {
 }
 
 @media (max-width: 650px) {
-  .plans-modal {
-    width: 70%;
-    height: 50%;
-  }
-
-  input,
-  button {
-    width: 70%;
-    height: 30%;
-    font-size: 20px;
-  }
-
-  .plans-modal h2 {
-    font-size: 26px;
-  }
-
-  .padlock-icon {
-    width: 50px;
-    height: 50px;
-  }
   
-  .button {
-    height: 70%;
-    width: 70%;
-    font-size: 20px;
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow-x: hidden; /* Remove a rolagem horizontal */
+}
+
+   .plans-modal {
+    margin-top: 100px;
+    flex-direction: column;
+    overflow-x: hidden; /* Remove a rolagem horizontal */
+    max-width: 100%;
+    max-height: 100%;
+    width: 300px;
+    height: 700px;
+    padding: 10x;
   }
 
+  .plans-modal h1 {
+    font-size: 20px;
+    margin: 10px 0 5px;
+  }
+  .plans-modal h2 {
+    font-size: 13px;
+  }
+
+.container-group {
+    max-width: 100%;
+    max-height: 60%;
+    flex-direction: column;
+    padding: 0;
+    margin: 0;
 }
+
+  .container {
+    width: 100%;
+    padding: 8px;
+
+  }
+
+  .container h2 {
+    font-size: 18px;
+    margin-bottom: 0;
+  }
+  .container .Bronze,
+  .container .Silver,
+  .container .Gold {
+    font-size: 18px;
+    margin-bottom: 0;
+  }
+  .container h3 {
+    font-size: 14px;
+    margin-bottom: 4px;
+  }
+  .container h4 {
+    font-size: 10px;
+  }
+
+  button {
+    width: 100%;
+    max-width: 340px;   /* botão não cola na borda */
+    height: 32px;
+    font-size: 18px;
+    margin: 10px auto 12px;
+  }
+
+  .payment-image {
+    width: 24px;
+    height: 24px;
+    margin: -40px auto 8px;
+    display: block;
+  }
+
+  h3.advise {
+    font-size: 12px;
+    
+    display: none !important;
+
+  }
+}
+
 </style>
