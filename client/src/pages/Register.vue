@@ -30,11 +30,12 @@
       width: 100%;
       height: 100%;
     }
+
     .register-modal {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      margin-bottom: 100px;
+      height: 70%;
+      width: 200px;
+      display: auto;
     }
+
+
 </style>

@@ -20,8 +20,14 @@
         margin: 0;
         padding: 0;
         height: 100%;
+        width: 100%;
+        overflow-x: hidden;
+        overflow: hidden; /* Remove a rolagem horizontal */
+        max-width: 100%;
     }
     .plans-page {
+      overflow-x: hidden; /* Remove a rolagem horizontal */
+      max-width: 100%;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -35,6 +41,5 @@
       justify-content: center;
       align-items: center;
       height: 100vh;
-      margin-bottom: 100px;
     }
 </style>

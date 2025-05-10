@@ -1,40 +1,47 @@
 <template>
-    <div class="register-modal">
-        <img class="person-icon" src="@/assets/register/person.svg" alt="padlock" />
-        <h2>Registrar na Plataforma</h2>
-        <div class="input-group">
-            <input id="email" type="text" v-model="email" placeholder="Email" />
-        </div>
-        <div class="input-group">
-            <input id="password" type="password" v-model="password" placeholder="Senha" />
-        </div>
-        <div class="input-group">
-            <input id="confirm-password" type="password" v-model="confirmPassword" placeholder="Confirmar Senha" />
-        </div>
-        <button @click="registar">Registrar</button>
+  <div class="register-modal">
+    <img class="arrow-back" src="@/assets/register/arrow_back.svg" alt="Voltar" @click="$router.push('/login')" />
+    <img class="person-icon" src="@/assets/register/person.svg" alt="padlock" />
+    <h2>Registrar na Plataforma</h2>
+    <div class="input-group">
+      <input id="email" type="text" v-model="email" placeholder="Email" />
     </div>
+    <div class="input-group">
+      <input id="password" type="password" v-model="password" placeholder="Senha" />
+    </div>
+    <div class="input-group">
+      <input id="confirm-password" type="password" v-model="confirmPassword" placeholder="Confirmar Senha" />
+    </div>
+    <button @click="registar">Registrar</button>
+  </div>
 </template>
+
 
 <script>
 export default {
-    name: 'registerModal',
-    data() {
-        return { email: '', password: '', confirmPassword: '' }
-    },
-    methods: {
-        registar() {
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(this.email)) {
-                alert('Por favor, insira um email válido!');
-                return;
-            }
-            if (this.password !== this.confirmPassword) {
-                alert('As senhas não coincidem!');
-                return;
-            }
-            console.log('Registro com:', this.email, this.password);
-        }
+  name: 'registerModal',
+  data() {
+    return { email: '', password: '', confirmPassword: '' }
+  },
+  methods: {
+    registar() {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(this.email)) {
+        alert('Por favor, insira um email válido!');
+        return;
+      }
+      if (this.password !== this.confirmPassword) {
+        alert('As senhas não coincidem!');
+        return;
+      }
+      if (this.email === 'admin@teste.com' && this.password === 'teste') {
+        alert('Usuário registrado com sucesso! Redirecionando para login...');
+        this.$router.push('/login');
+      } else {
+        console.log('Registro com:', this.email, this.password);
+      }
     }
+  }
 }
 </script>
 
@@ -42,10 +49,34 @@ export default {
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
+
+.register-modal {
+    position: relative;
+    background-color: #f2f2f2;
+    border: 2px solid #ccc;
+    border-radius: 30px;
+    padding: 20px;
+    width: 50%;
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.arrow-back {
+  position: absolute;      
+  top: 16px;               
+  left: 16px;              
+  width: 25px;            
+  height: 25px;
+  cursor: pointer;
+}
+
 .person-icon {
-    margin-top: 50px;
-    width: 75px;
-    height: 75px;
+    margin-top: 70px;
+    width: 50px;
+    height: 50px;
     margin-bottom: 20px;
     align-items: center;
     justify-content: center;
@@ -54,19 +85,6 @@ export default {
     border-radius: 50%;
 }
 
-
-.register-modal {
-    background-color: #f2f2f2;
-    border: 2px solid #ccc;
-    border-radius: 30px;
-    padding: 20px;
-    width: 700px;
-    height: 700px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
 .register-modal h2 {
     margin-bottom: 20px;
     font-size: 42px;
@@ -128,14 +146,19 @@ button {
 
 @media (max-width: 1024px) {
   .register-modal {
-    width: 90%;
-    height: auto;
+    width: 70%;
+    height: 70%;
     padding: 30px;
   }
 
-  input,
-  button {
+  input {
     width: 90%;
+    font-size: 24px;
+  }
+
+  button {
+    width: 70%;
+    height: 70px;
     font-size: 24px;
   }
 
@@ -150,6 +173,13 @@ button {
 }
 
 @media (max-width: 650px) {
+
+  .person-icon {
+    margin-top: 80px;
+    width: 50px;
+    height: 50px;
+  }
+
   .register-modal {
     width: 70%;
     height: 50%;
