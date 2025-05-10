@@ -41,6 +41,5 @@
       justify-content: center;
       align-items: center;
       height: 100vh;
-      margin-bottom: 100px;
     }
 </style>

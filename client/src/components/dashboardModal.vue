@@ -1,7 +1,8 @@
 <template>
     <div class="dashboard-modal">
       <h2>GoToMarket – Dashboard</h2>
-  
+      <img src="@/assets/home/market.svg" alt="Market Icon" class="market-icon" @click="$router.push('/plans')" />
+      <img src="@/assets/home/arrow_back.svg" alt="Back Arrow" class="back-arrow-icon" @click="$router.push('/login')" />
       <div class="cards">
         <!-- Postagens -->
         <div class="card postagens">
@@ -63,15 +64,14 @@
   <script>
   export default {
     name: 'dashboardModal',
-    // adicione props ou dados reativos aqui, se necessário
   }
   </script>
   
   <style scoped>
   @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
   
-  /* Container principal */
   .dashboard-modal {
+    position: relative;
     font-family: 'Roboto', sans-serif;
     background-color: #f2f2f2;
     border: 2px solid #ccc;
@@ -82,6 +82,24 @@
     display: flex;
     flex-direction: column;
   }
+
+  .market-icon {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+  }
+  
+  .back-arrow-icon {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+  }
   
   .dashboard-modal h2 {
     text-align: center;
@@ -90,7 +108,6 @@
     margin-bottom: 20px;
   }
   
-  /* Grid de cards */
   .cards {
     flex: 1;
     display: grid;
@@ -102,7 +119,6 @@
     gap: 20px;
   }
   
-  /* Estilo base de cada card */
   .card {
     background: #fff;
     border-radius: 20px;

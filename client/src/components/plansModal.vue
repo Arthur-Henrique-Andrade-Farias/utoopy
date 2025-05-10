@@ -1,6 +1,7 @@
 <template>
     <div class="plans-modal">
         <h1>GoToMarket - Instagram</h1>
+        <img src="@/assets/plans/arrow_back.svg" alt="Arrow back" class="arrow-back-icon" @click="$router.push('/home')" />
         <h2>I.A. de gerenciamento de postagens, comentários e usuários no Instagram.</h2>
         <img src="@/assets/plans/payments.svg" alt="Payment" class="payment-image" />
         <div class="container-group">
@@ -58,6 +59,7 @@ html, body {
   overflow-x: hidden; /* só scroll vertical */
 }
 .plans-modal {
+  position: relative;
     background-color: #f2f2f2;
     border: 2px solid #ccc;
     border-radius: 30px;
@@ -69,6 +71,15 @@ html, body {
     align-items: center;
     justify-content: center;
 }
+
+  .arrow-back-icon {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+  }
 
 .plans-modal h1 {
     margin-top: 40px;

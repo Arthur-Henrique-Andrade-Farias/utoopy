@@ -11,22 +11,26 @@
         <button @click="entrar">Entrar</button>
         <div class="login-links">
             <a href="#" class="forgot-password">Esqueceu sua senha?</a>
-            <a href="#" class="register">Registre-se aqui!</a>
+            <a href="#" class="register" @click.prevent="$router.push('/register')">Registre-se aqui!</a>
         </div>
     </div>
 </template>
 
 <script>
 export default {
-    name: 'loginModal',
-    data() {
-        return { email: '', password: '' }
-    },
-    methods: {
-        entrar() {
-            console.log('Login com:', this.email, this.password)
-        }
+  name: 'loginModal',
+  data() {
+    return { email: '', password: '' }
+  },
+  methods: {
+    entrar() {
+      if (this.email === 'admin@teste.com' && this.password === 'teste') {
+        this.$router.push('/home'); 
+      } else {
+        console.log('Credenciais inválidas');
+      }
     }
+  }
 }
 </script>
 
@@ -72,8 +76,8 @@ export default {
     border: 2px solid #ccc;
     border-radius: 30px;
     padding: 20px;
-    width: 700px;
-    height: 700px;
+    width: 50%;
+    height: 80%;
     display: flex;
     flex-direction: column;
     align-items: center;
