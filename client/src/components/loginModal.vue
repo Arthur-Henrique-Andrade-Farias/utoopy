@@ -16,22 +16,29 @@
     </div>
 </template>
 
-<script>
-export default {
-  name: 'loginModal',
-  data() {
-    return { email: '', password: '' }
-  },
-  methods: {
-    entrar() {
-      if (this.email === 'admin@teste.com' && this.password === 'teste') {
-        this.$router.push('/home'); 
-      } else {
-        console.log('Credenciais inválidas');
-      }
-    }
+<script setup>
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
+import { api } from '@/services/api';
+
+const router   = useRouter();
+const email    = ref('');
+const password = ref('');
+
+const entrar = async () => {
+  try {
+    const { data } = await api.post('/login', {
+      email: email.value,
+      password: password.value
+    });
+
+    localStorage.setItem('token', data.token);
+    alert('Login efetuado com sucesso!');
+    router.push('/home');                         
+  } catch (err) {
+    alert(err.response?.data?.msg || 'Credenciais inválidas');
   }
-}
+};
 </script>
 
 <style scoped>

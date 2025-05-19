@@ -12,38 +12,42 @@
     <div class="input-group">
       <input id="confirm-password" type="password" v-model="confirmPassword" placeholder="Confirmar Senha" />
     </div>
-    <button @click="registar">Registrar</button>
+    <button @click="registrar">Registrar</button>
   </div>
 </template>
 
+<script setup>
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
+import { api } from '@/services/api';
 
-<script>
-export default {
-  name: 'registerModal',
-  data() {
-    return { email: '', password: '', confirmPassword: '' }
-  },
-  methods: {
-    registar() {
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailRegex.test(this.email)) {
-        alert('Por favor, insira um email válido!');
-        return;
-      }
-      if (this.password !== this.confirmPassword) {
-        alert('As senhas não coincidem!');
-        return;
-      }
-      if (this.email === 'admin@teste.com' && this.password === 'teste') {
-        alert('Usuário registrado com sucesso! Redirecionando para login...');
-        this.$router.push('/login');
-      } else {
-        console.log('Registro com:', this.email, this.password);
-      }
-    }
+const router          = useRouter();
+const name            = ref('');
+const email           = ref('');
+const password        = ref('');
+const confirmPassword = ref('');
+
+const registrar = async () => {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(email.value))               return alert('E-mail inválido');
+  if (password.value !== confirmPassword.value)    return alert('Senhas diferentes');
+
+  try {
+    const { data } = await api.post('/register', {
+      name: name.value || 'Usuário',
+      email: email.value,
+      password: password.value
+    });
+
+    localStorage.setItem('token', data.token);
+    alert('Conta criada com sucesso! Faça login.');
+    router.push('/login');                         // 👈 redireciona
+  } catch (err) {
+    alert(err.response?.data?.msg || 'Erro ao registrar');
   }
-}
+};
 </script>
+
 
 <style scoped>
 
