@@ -26,7 +26,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        background-color: #9188C2;
+        background-color: #88c28d;
         margin-bottom: 100px;
         width: 100%;
         height: 100%;

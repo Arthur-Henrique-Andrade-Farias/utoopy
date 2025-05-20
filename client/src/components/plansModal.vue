@@ -64,8 +64,8 @@ html, body {
     border: 2px solid #ccc;
     border-radius: 30px;
     padding: 20px;
-    width: 700px;
-    height: 500px;
+    width: 50%;
+    height: 80%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -88,11 +88,11 @@ html, body {
     font-weight: bold;
     text-align: center;
     font-family: 'Roboto', sans-serif;
-    margin-bottom: -10px;
+    margin-bottom: px;
 }
 
 .plans-modal h2 {
-    margin-bottom: 80px;
+    margin-bottom: 140px;
     font-size: 18px;
     color: #333;
     text-align: center;
@@ -112,7 +112,7 @@ html, body {
     align-items: center;
     justify-content: flex-end;
     width: 30%;
-    height: 300px;
+    height: 400px;
     border: 1px solid #ccc;
     border-radius: 10px;
     padding: 10px;
@@ -125,25 +125,25 @@ html, body {
     font-weight: bold;
     text-align: center;
     font-family: 'Roboto', sans-serif;
-    margin-bottom: -20px; /* Reduced spacing */
+    margin-bottom: 0px; /* Reduced spacing */
 }
 
 .container .Bronze {
     color: #CD7F32;
     font-size: 24px;
-    margin-bottom: -10px; /* Reduced spacing */
+    margin-bottom: 0px; /* Reduced spacing */
 }
 
 .container .Silver {
     color: #C0C0C0;
     font-size: 24px;
-    margin-bottom: -10px; /* Reduced spacing */
+    margin-bottom: 0px; /* Reduced spacing */
 }
 
 .container .Gold {
     color: #FFD700;
     font-size: 24px;
-    margin-bottom: -10px; /* Reduced spacing */
+    margin-bottom: 0px; /* Reduced spacing */
 }
 
 .container h3 {
@@ -152,7 +152,7 @@ html, body {
     font-weight: bold;
     text-align: center;
     font-family: 'Roboto', sans-serif;
-    margin-bottom: -10px; /* Reduced spacing */
+    margin-bottom: 0px; /* Reduced spacing */
 }
 
 .container h4 {
@@ -183,7 +183,7 @@ button {
     width: 30px;
     height: 30px;
     margin-top: -80px;
-    margin-bottom: 10px;
+    margin-bottom: 60px;
     border: 20px solid white;
     background-color: white;
     border-radius: 50%;

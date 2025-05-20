@@ -9,7 +9,7 @@ if (!secret) {
   throw new Error('JWT_SECRET não definido – crie ou edite o arquivo .env');
 }
 
-export const signToken  = (payload) => jwt.sign(payload, secret, { expiresIn: '7d' });
+export const signToken  = (payload) => jwt.sign(payload, secret, { expiresIn: '24h' });
 export const verifyToken = (req, res, next) => {
   const auth = req.headers.authorization;
   if (!auth?.startsWith('Bearer ')) return res.status(401).json({ msg: 'Token ausente' });
