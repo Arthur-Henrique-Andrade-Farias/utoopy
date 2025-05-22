@@ -1,50 +1,128 @@
 <template>
-    <div class="plans-modal">
-        <h1>GoToMarket - Instagram</h1>
-        <img src="@/assets/plans/arrow_back.svg" alt="Arrow back" class="arrow-back-icon" @click="$router.push('/home')" />
-        <h2>I.A. de gerenciamento de postagens, comentários e usuários no Instagram.</h2>
-        <img src="@/assets/plans/payments.svg" alt="Payment" class="payment-image" />
-        <div class="container-group">
-            <div class="container">
-                <h2>R$49,90</h2>
-                <h2 class="Bronze">Bronze</h2>
-                <h3>AutomatePosts</h3> 
-                <h4>Posts automatizados, alocação de horário, criação de imagens e descrições.</h4>                
-                <button @click="entrar">Selecionar</button>
-            </div>
-            <div class="container">
-                <h2>R$79,90</h2>
-                <h2 class="Silver">Silver +</h2>
-                <h3>AutomatePosts</h3> 
-                <h3>AutomateComments</h3> 
-                <h4>Comentários automatizados, resposta de comentários em suas postagens, e gerenciamento de interações, além do incluso no plano Bronze.</h4>             
-                <button @click="entrar">Selecionar</button>
-            </div>
-            <div class="container">
-                <h2>R$99,90</h2>
-                <h2 class="Gold">Gold ++</h2>
-                <h3>AutomatePosts</h3> 
-                <h3>AutomateComments</h3>
-                <h3>AutomateAdmin</h3>  
-                <h4>Administração automatizada, visualização e análise de "likes", "shares" e seguidores, configuração personalizada, além do incluso no plano Silver + .</h4>                                                  
-                <button @click="entrar">Selecionar</button>
-            </div>
-        </div>
-        <h3 class="advise">Valores passíveis de negociação, assim como os produtos em questão. Para mais informações, whatsApp: 000000000000</h3>
+  <div class="plans-modal">
+    <h1>GoToMarket - Instagram</h1>
+    <img
+      src="@/assets/plans/arrow_back.svg"
+      alt="Voltar"
+      class="arrow-back-icon"
+      @click="$router.push('/home')"
+    />
+
+    <h2>
+      I.A. de gerenciamento de postagens, comentários e usuários no Instagram.
+    </h2>
+
+    <img
+      src="@/assets/plans/payments.svg"
+      alt="Payment"
+      class="payment-image"
+    />
+
+    <div class="container-group">
+      <div
+        v-for="plan in plans"
+        :key="plan.id"
+        class="container"
+        :class="plan.id"
+      >
+        <h2>{{ formatPrice(plan.price) }}</h2>
+        <h2 :class="plan.idClass">{{ plan.name }}</h2>
+
+        <template v-if="plan.id === 'bronze'">
+          <h3>AutomatePosts</h3>
+          <h4>
+            Posts automatizados, alocação de horário, criação de imagens e
+            descrições.
+          </h4>
+        </template>
+        <template v-else-if="plan.id === 'silver'">
+          <h3>AutomatePosts</h3>
+          <h3>AutomateComments</h3>
+          <h4>
+            Comentários automatizados, resposta de comentários em suas postagens
+            e gerenciamento de interações, além do incluso no plano Bronze.
+          </h4>
+        </template>
+        <template v-else>
+          <h3>AutomatePosts</h3>
+          <h3>AutomateComments</h3>
+          <h3>AutomateAdmin</h3>
+          <h4>
+            Administração automatizada, visualização e análise de "likes",
+            "shares" e seguidores, configuração personalizada, além do incluso
+            no plano Silver +.
+          </h4>
+        </template>
+
+        <button
+          :disabled="plan.selected"
+          :class="{ selected: plan.selected }"
+          @click="selectPlan(plan)"
+        >
+          {{ plan.selected ? 'Selecionado' : 'Selecionar' }}
+        </button>
+      </div>
     </div>
+
+    <h3 class="advise">
+      Valores passíveis de negociação, assim como os produtos em questão. Para
+      mais informações, WhatsApp: 000000000000
+    </h3>
+  </div>
 </template>
 
 <script>
 export default {
-    name: 'loginModal',
-    data() {
-        return { email: '', password: '' }
-    },
-    methods: {
-        entrar() {
-            console.log('Login com:', this.email, this.password)
-        }
+  name: 'PlansModal',
+  data() {
+    return {
+      /* lista base visível mesmo se a chamada API falhar */
+      plans: [
+        { id: 'bronze', name: 'Bronze',   idClass: 'Bronze', price: 49.9, selected: false },
+        { id: 'silver', name: 'Silver +', idClass: 'Silver', price: 79.9, selected: false },
+        { id: 'gold',   name: 'Gold ++',  idClass: 'Gold',   price: 99.9, selected: false },
+      ],
     }
+  },
+  mounted() {
+    this.fetchPlans()
+  },
+  methods: {
+    /* Atualiza apenas a flag de plano já contratado */
+    async fetchPlans() {
+      try {
+        const token = localStorage.getItem('token')
+        const res = await fetch('/api/plans', {
+          headers: { Authorization: `Bearer ${token}` },
+        })
+        if (!res.ok) throw new Error('Falha ao buscar planos')
+        const { plans: serverPlans } = await res.json()
+
+        // sincronia: mantém todos os planos visíveis e só marca selected
+        serverPlans.forEach((srv) => {
+          const local = this.plans.find((p) => p.id === srv.id)
+          if (local) local.selected = !!srv.selected
+        })
+      } catch (err) {
+        console.error(err) // se falhar, lista padrão continua visível
+      }
+    },
+
+    formatPrice(v) {
+      return v.toLocaleString('pt-BR', {
+        style: 'currency',
+        currency: 'BRL',
+        minimumFractionDigits: 2,
+      })
+    },
+
+    /* chamada para upgrade (a implementar) */
+    async selectPlan(plan) {
+      if (plan.selected) return
+      console.log('Selecionar plano', plan.id)
+      // POST /api/plans/upgrade ...
+    },
+  },
 }
 </script>
 
@@ -64,8 +142,8 @@ html, body {
     border: 2px solid #ccc;
     border-radius: 30px;
     padding: 20px;
-    width: 700px;
-    height: 500px;
+    width: 50%;
+    height: 80%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -88,11 +166,11 @@ html, body {
     font-weight: bold;
     text-align: center;
     font-family: 'Roboto', sans-serif;
-    margin-bottom: -10px;
+    margin-bottom: px;
 }
 
 .plans-modal h2 {
-    margin-bottom: 80px;
+    margin-bottom: 140px;
     font-size: 18px;
     color: #333;
     text-align: center;
@@ -112,7 +190,7 @@ html, body {
     align-items: center;
     justify-content: flex-end;
     width: 30%;
-    height: 300px;
+    height: 400px;
     border: 1px solid #ccc;
     border-radius: 10px;
     padding: 10px;
@@ -125,25 +203,25 @@ html, body {
     font-weight: bold;
     text-align: center;
     font-family: 'Roboto', sans-serif;
-    margin-bottom: -20px; /* Reduced spacing */
+    margin-bottom: 0px; /* Reduced spacing */
 }
 
 .container .Bronze {
     color: #CD7F32;
     font-size: 24px;
-    margin-bottom: -10px; /* Reduced spacing */
+    margin-bottom: 0px; /* Reduced spacing */
 }
 
 .container .Silver {
     color: #C0C0C0;
     font-size: 24px;
-    margin-bottom: -10px; /* Reduced spacing */
+    margin-bottom: 0px; /* Reduced spacing */
 }
 
 .container .Gold {
     color: #FFD700;
     font-size: 24px;
-    margin-bottom: -10px; /* Reduced spacing */
+    margin-bottom: 0px; /* Reduced spacing */
 }
 
 .container h3 {
@@ -152,7 +230,7 @@ html, body {
     font-weight: bold;
     text-align: center;
     font-family: 'Roboto', sans-serif;
-    margin-bottom: -10px; /* Reduced spacing */
+    margin-bottom: 0px; /* Reduced spacing */
 }
 
 .container h4 {
@@ -183,7 +261,7 @@ button {
     width: 30px;
     height: 30px;
     margin-top: -80px;
-    margin-bottom: 10px;
+    margin-bottom: 60px;
     border: 20px solid white;
     background-color: white;
     border-radius: 50%;

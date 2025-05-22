@@ -1,16 +1,16 @@
 <template >
-    <div class="login-page">
-      <login-modal class="login-modal"/>
+    <div class="forgotPass-page">
+      <forgotPass-modal class="forgotPass-modal"/>
     </div>
   </template>
   
   <script>
-  import loginModal from '@/components/loginModal.vue'
+  import forgotPassModal from '@/components/forgotPassModal.vue'
   
   export default {
-    name: 'LoginPage',
+    name: 'ForgotPassPage',
     components: {
-      loginModal
+        forgotPassModal
     }
   }
   </script>
@@ -21,19 +21,21 @@
         padding: 0;
         height: 100%;
     }
-    .login-page {
+    .forgotPass-page {
       display: flex;
       justify-content: center;
       align-items: center;
       background-color: #88c28d;
+      margin-bottom: 100px;
       width: 100%;
       height: 100%;
     }
 
-    .login-modal {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
+    .forgotPass-modal {
+      height: 70%;
+      width: 200px;
+      display: auto;
     }
+
+
 </style>

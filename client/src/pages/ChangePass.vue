@@ -1,16 +1,16 @@
 <template >
-    <div class="login-page">
-      <login-modal class="login-modal"/>
+    <div class="changePass-page">
+      <changePass-modal class="changePass-modal"/>
     </div>
   </template>
   
   <script>
-  import loginModal from '@/components/loginModal.vue'
+  import changePassModal from '@/components/changePassModal.vue'
   
   export default {
-    name: 'LoginPage',
+    name: 'changePass',
     components: {
-      loginModal
+        changePassModal
     }
   }
   </script>
@@ -21,19 +21,21 @@
         padding: 0;
         height: 100%;
     }
-    .login-page {
+    .changePass-page {
       display: flex;
       justify-content: center;
       align-items: center;
       background-color: #88c28d;
+      margin-bottom: 100px;
       width: 100%;
       height: 100%;
     }
 
-    .login-modal {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
+    .changePass-modal {
+      height: 70%;
+      width: 200px;
+      display: auto;
     }
+
+
 </style>

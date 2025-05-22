@@ -1,71 +1,160 @@
+<script setup>
+import { onMounted, ref, computed } from 'vue';
+import axios from 'axios';
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
+
+/* estado */
+const level        = ref('starter');
+const posts        = ref([]);
+const comments     = ref([]);
+const analytics    = ref({});
+const postsMocked  = ref(false);
+const commMocked   = ref(false);
+const analMocked   = ref(false);
+
+/* ========= 1. BUSCA ========== */
+onMounted(async () => {
+  const token = localStorage.getItem('token');
+  try {
+    const { data } = await axios.get('http://localhost:3000/api/home', {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+
+    level.value     = data.user.level;
+    posts.value     = data.posts;
+    comments.value  = data.comments;
+    analytics.value = data.analytics;
+
+    /** se não houver dados reais, injeta mock + flag **/
+    if (canShowPosts.value && posts.value.length === 0) {
+      posts.value = [
+        { id: 1, day: '21/05/2025', hour: '09:00', theme: 'Lançamento do Produto X' },
+        { id: 2, day: '22/05/2025', hour: '14:30', theme: 'Dica de Marketing Digital' },
+        { id: 3, day: '23/05/2025', hour: '10:15', theme: 'Depoimento de Cliente' }
+      ];
+      postsMocked.value = true;
+    }
+    if (canShowComments.value && comments.value.length === 0) {
+      comments.value = [
+        {
+          id: 1, author_name: 'Maria', text: 'Adorei o conteúdo!', created_at: '21/05/2025 10:05',
+          replies: [{ id: 2, author_name: 'Equipe', text: 'Obrigado pelo feedback! 😊', created_at: '21/05/2025 10:20', replies: [] }]
+        }
+      ];
+      commMocked.value = true;
+    }
+    if (canShowAnalytics.value && Object.keys(analytics.value).length === 0) {
+      analytics.value = { posts_count: 120, likes_count: 3400, followers_count: 980 };
+      analMocked.value = true;
+    }
+
+  } catch (e) {
+    console.error(e);
+    router.push('/login');
+  }
+});
+
+/* ========= 2. PERMISSÕES ========== */
+const canShowPosts     = computed(() => ['bronze','silver','gold'].includes(level.value));
+const canShowComments  = computed(() => ['silver','gold'].includes(level.value));
+const canShowAnalytics = computed(() => level.value === 'gold');
+</script>
+
 <template>
-    <div class="dashboard-modal">
-      <h2>GoToMarket – Dashboard</h2>
-      <img src="@/assets/home/market.svg" alt="Market Icon" class="market-icon" @click="$router.push('/plans')" />
-      <img src="@/assets/home/arrow_back.svg" alt="Back Arrow" class="back-arrow-icon" @click="$router.push('/login')" />
-      <div class="cards">
-        <!-- Postagens -->
-        <div class="card postagens">
-          <h3>Postagens</h3>
-          <table>
-            <thead>
-              <tr>
-                <th>Dia</th>
-                <th>Hora</th>
-                <th>Tema</th>
-              </tr>
-            </thead>
-            <tbody>
-              <!-- Linhas de exemplo (substitua pelos dados reais) -->
-              <tr><td></td><td></td><td></td></tr>
-              <tr><td></td><td></td><td></td></tr>
-              <tr><td></td><td></td><td></td></tr>
-            </tbody>
-          </table>
-        </div>
-  
-        <!-- Comentários -->
-        <div class="card comentarios">
-          <h3>Comentários</h3>
-          <ul>
-            <!-- Repita conforme o número de comentários -->
-            <li v-for="n in 4" :key="n">
-              <div class="avatar"></div>
-              <div class="coment-text">
-                <div class="line line-short"></div>
-                <div class="line line-long"></div>
-              </div>
-            </li>
-          </ul>
-        </div>
-  
-        <!-- Analytics -->
-        <div class="card analytics">
-          <h3>Analytics</h3>
-          <div class="metrics">
-            <div class="metric">
-              <span class="value">X</span>
-              <span class="label">Posts</span>
-            </div>
-            <div class="metric">
-              <span class="value">X</span>
-              <span class="label">Likes</span>
-            </div>
-            <div class="metric">
-              <span class="value">X</span>
-              <span class="label">Seguidores</span>
-            </div>
+  <div class="dashboard-modal">
+    <h2>GoToMarket – Dashboard</h2>
+
+    <img src="@/assets/home/market.svg"  class="market-icon"      @click="$router.push('/plans')" />
+    <img src="@/assets/home/arrow_back.svg" class="back-arrow-icon" @click="$router.push('/login')" />
+
+    <div class="cards">
+      <!-- ----- POSTAGENS ----- -->
+      <div v-if="canShowPosts" class="card postagens">
+        <h3>Postagens</h3>
+        <table>
+          <thead><tr><th>Dia</th><th>Hora</th><th>Tema</th></tr></thead>
+          <tbody>
+            <tr v-for="p in posts" :key="p.id">
+              <td>{{ p.day }}</td><td>{{ p.hour }}</td><td>{{ p.theme }}</td>
+            </tr>
+          </tbody>
+        </table>
+        <small v-if="postsMocked" class="upgrade-msg">
+          *Exemplo de dados. Agende posts reais para vê-los aqui.
+        </small>
+      </div>
+      <div v-else class="card locked">
+        <h3>Postagens</h3>
+        <p class="upgrade-msg">Disponível a partir do <strong>Plano Bronze</strong>.</p>
+      </div>
+
+      <!-- ----- COMENTÁRIOS ----- -->
+      <div v-if="canShowComments" class="card comentarios">
+        <h3>Comentários</h3>
+        <ul>
+          <CommentItem v-for="c in comments" :key="c.id" :comment="c" />
+        </ul>
+        <small v-if="commMocked" class="upgrade-msg">
+          *Exemplo de dados. Migre integrações para ver comentários reais.
+        </small>
+      </div>
+      <div v-else class="card locked">
+        <h3>Comentários</h3>
+        <p class="upgrade-msg">Disponível a partir do <strong>Plano Silver</strong>.</p>
+      </div>
+
+      <!-- ----- ANALYTICS ----- -->
+      <div v-if="canShowAnalytics" class="card analytics">
+        <h3>Analytics</h3>
+        <div class="metrics">
+          <div class="metric">
+            <span class="value">{{ analytics.posts_count }}</span>
+            <span class="label">Posts</span>
+          </div>
+          <div class="metric">
+            <span class="value">{{ analytics.likes_count }}</span>
+            <span class="label">Likes</span>
+          </div>
+          <div class="metric">
+            <span class="value">{{ analytics.followers_count }}</span>
+            <span class="label">Seguidores</span>
           </div>
         </div>
+        <small v-if="analMocked" class="upgrade-msg">
+          *Exemplo de métricas. Conecte suas redes para ver dados reais.
+        </small>
+      </div>
+      <div v-else class="card locked">
+        <h3>Analytics</h3>
+        <p class="upgrade-msg">Disponível no <strong>Plano Gold</strong>.</p>
       </div>
     </div>
-  </template>
-  
-  <script>
-  export default {
-    name: 'dashboardModal',
-  }
-  </script>
+  </div>
+</template>
+
+<!-- componente recursivo p/ replies -->
+<script>
+export default {
+  name: 'CommentItem',
+  props: { comment: Object },
+  template: `
+    <li>
+      <div class="avatar"></div>
+      <div class="coment-text">
+        <strong>{{ comment.author_name || 'Usuário' }}</strong>
+        <p>{{ comment.text }}</p>
+        <small>{{ comment.created_at }}</small>
+      </div>
+      <ul v-if="comment.replies.length" class="replies">
+        <CommentItem v-for="r in comment.replies" :key="r.id" :comment="r" />
+      </ul>
+    </li>
+  `
+};
+</script>
+
   
   <style scoped>
   @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
@@ -77,8 +166,8 @@
     border: 2px solid #ccc;
     border-radius: 30px;
     padding: 20px;
-    width: 700px;
-    height: 500px;
+    width: 50%;
+    height: 80%;
     display: flex;
     flex-direction: column;
   }
