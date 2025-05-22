@@ -2,11 +2,16 @@
   "name": "utoopy-monorepo",
   "private": true,
   "scripts": {
-    "backend":  "npm --prefix server run dev",   
-    "frontend": "npm --prefix client run serve", 
-    "dev":      "concurrently --names \"back,front\" --raw \"npm run backend\" \"npm run frontend\""
+    "backend": "npm --prefix server run dev",
+    "frontend": "npm --prefix client run serve",
+    "dev": "concurrently --names \"back,front\" --raw \"npm run backend\" \"npm run frontend\""
   },
   "devDependencies": {
     "concurrently": "^8.2.1"
+  },
+  "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "googleapis": "^149.0.0",
+    "nodemailer": "^7.0.3"
   }
 }

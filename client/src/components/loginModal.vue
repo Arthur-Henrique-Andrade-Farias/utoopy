@@ -10,7 +10,7 @@
         </div>
         <button @click="entrar">Entrar</button>
         <div class="login-links">
-            <a href="#" class="forgot-password" @click.prevent="$router.push('/forgotPass')">Esqueceu sua Senha?</a>
+            <a href="#" class="forgot-password" @click.prevent="$router.push('/forgot-password')">Esqueceu sua Senha?</a>
             <a href="#" class="register" @click.prevent="$router.push('/register')">Registre-se aqui!</a>
         </div>
     </div>

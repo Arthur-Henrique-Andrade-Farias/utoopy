@@ -4,9 +4,9 @@ import Login from '@/pages/Login.vue'
 import Register from '@/pages/Register.vue'
 import Plans from '@/pages/Plans.vue'
 import Home from '@/pages/Home.vue'
-import ForgotPass from '@/pages/ForgotPass.vue'
+import ForgotPassword from '@/pages/ForgotPass.vue'
 import ConfirmCode from '@/pages/ConfirmCode.vue'
-import ChangePass from '@/pages/ChangePass.vue'
+import ChangePassword from '@/pages/ChangePass.vue'
 
 const routes = [
   {
@@ -29,20 +29,22 @@ const routes = [
     name: 'Home',
     component: Home
   },
-    {
-    path: '/forgotPass',
-    name: 'ForgotPass',
-    component: ForgotPass
+  {
+    path: '/forgot-password',
+    name: 'ForgotPassword',
+    component: ForgotPassword // Seu componente da primeira etapa
   },
-    {
-    path: '/confirmCode',
+  {
+    path: '/confirm-code/:email', // Aceita o email como parâmetro
     name: 'ConfirmCode',
-    component: ConfirmCode
+    component: ConfirmCode,
+    props: true // Permite que route.params seja passado como props para o componente
   },
-      {
-    path: '/changePass',
-    name: 'ChangePass',
-    component: ChangePass
+  {
+    path: '/change-password/:email/:code', // Aceita email e código
+    name: 'ChangePassword',
+    component: ChangePassword,
+    props: true
   }
 ]
 

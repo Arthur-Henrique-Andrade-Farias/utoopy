@@ -2,9 +2,9 @@ import * as dotenv from 'dotenv';
 dotenv.config();
 
 import { Router } from 'express';
-import { pool } from '../config/db.js';
-import bcrypt from 'bcryptjs';
+import bcrypt       from 'bcryptjs';
 import { signToken } from '../utils/jwt.js';
+import { supabase }  from '../../databases/supabaseClient.js';   // << mudou!
 
 const router = Router();
 
@@ -15,26 +15,35 @@ router.post('/register', async (req, res) => {
     return res.status(400).json({ msg: 'Nome, e-mail e senha são obrigatórios' });
 
   try {
-    // 1. E-mail duplicado?
-    const [rows] = await pool.execute('SELECT id FROM users WHERE email = ?', [email]);
-    if (rows.length) return res.status(409).json({ msg: 'E-mail já cadastrado' });
+    /* 1) E-mail duplicado? */
+    const { data: existingUser, error: dupErr } = await supabase
+      .from('users')
+      .select('id')
+      .eq('email', email)
+      .maybeSingle();                              // retorna null se não achar
 
-    // 2. Hash da senha
+    if (dupErr) throw dupErr;
+    if (existingUser) return res.status(409).json({ msg: 'E-mail já cadastrado' });
+
+    /* 2) Hash da senha */
     const hash = await bcrypt.hash(password, 12);
 
-    // 3. Inserir no banco
-    const [result] = await pool.execute(
-      'INSERT INTO users (name, email, password) VALUES (?, ?, ?)',
-      [name, email, hash]
-    );
+    /* 3) Inserir usuário */
+    const { data: inserted, error: insErr } = await supabase
+      .from('users')
+      .insert({ name, email, password: hash })
+      .select('id')                                // devolve o id recém-gerado
+      .single();
 
-    // 4. Gerar token
-    const token = signToken({ id: result.insertId, name, email });
+    if (insErr) throw insErr;
 
+    /* 4) Token */
+    const token = signToken({ id: inserted.id, name, email });
     res.status(201).json({ token });
+
   } catch (err) {
     console.error(err);
-    res.status(500).json({ msg: 'Erro interno' });
+    res.status(500).json({ msg: 'Erro interno', error: err.message });
   }
 });
 
@@ -45,23 +54,30 @@ router.post('/login', async (req, res) => {
     return res.status(400).json({ msg: 'E-mail e senha são obrigatórios' });
 
   try {
-    // 1. Usuário existe?
-    const [rows] = await pool.execute('SELECT * FROM users WHERE email = ?', [email]);
-    if (!rows.length) return res.status(401).json({ msg: 'Credenciais inválidas' });
+    /* 1) Usuário existe? */
+    const { data: user, error: usrErr } = await supabase
+      .from('users')
+      .select('*')
+      .eq('email', email)
+      .single();                                   // erro se não achar
 
-    const user = rows[0];
+    if (usrErr) {
+      if (usrErr.code === 'PGRST116')              // “No rows”
+        return res.status(401).json({ msg: 'Credenciais inválidas' });
+      throw usrErr;
+    }
 
-    // 2. Senha confere?
+    /* 2) Senha confere? */
     const ok = await bcrypt.compare(password, user.password);
     if (!ok) return res.status(401).json({ msg: 'Credenciais inválidas' });
 
-    // 3. Token
+    /* 3) Token */
     const token = signToken({ id: user.id, name: user.name, email: user.email });
-
     res.json({ token });
+
   } catch (err) {
     console.error(err);
-    res.status(500).json({ msg: 'Erro interno' });
+    res.status(500).json({ msg: 'Erro interno', error: err.message });
   }
 });
 
