@@ -133,7 +133,7 @@ const verificarCodigo = async () => {
 };
 
 const voltarParaLogin = () => {
-  router.push('/login'); // ou para a tela de 'esqueceu a senha'
+  router.push('/'); // ou para a tela de 'esqueceu a senha'
 };
 
 // Limpa o intervalo quando o componente é desmontado
@@ -230,7 +230,7 @@ button {
     cursor: pointer;
     margin-bottom: 15px; /* Ajustado */
     color: white;
-    background-color: #4E4794;
+    background-color: black;
     font-family: 'Roboto', sans-serif;
 }
 button:disabled {

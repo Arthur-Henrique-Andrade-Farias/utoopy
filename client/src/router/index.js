@@ -10,7 +10,7 @@ import ChangePassword from '@/pages/ChangePass.vue'
 
 const routes = [
   {
-    path: '/login',
+    path: '/',
     name: 'Login',
     component: Login
   },

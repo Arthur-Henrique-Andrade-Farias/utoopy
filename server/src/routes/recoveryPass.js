@@ -80,9 +80,9 @@ router.post('/forgot-password', async (req, res) => {
         }
         let emailTransporter = await createTransporter();
         const mailOptions = {
-            from: `"Seu App" <${process.env.GMAIL_USER}>`,
+            from: `"Utoopy" <${process.env.GMAIL_USER}>`,
             to: email,
-            subject: 'Código de Recuperação de Senha - Seu App',
+            subject: 'Código de Recuperação de Senha - Utoopy',
             text: `Olá,\n\nSeu código de recuperação é: ${recoveryCode}\n\nEste código expira em 1 hora.`,
             html: `<p>Olá,</p><p>Seu código de recuperação é: <strong>${recoveryCode}</strong></p><p>Este código expira em 1 hora.</p>`,
         };
