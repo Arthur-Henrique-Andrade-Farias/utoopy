@@ -116,11 +116,25 @@ export default {
       })
     },
 
-    /* chamada para upgrade (a implementar) */
+    /* Modificado para redirecionar para a página de pagamento Kiwify */
     async selectPlan(plan) {
-      if (plan.selected) return
-      console.log('Selecionar plano', plan.id)
-      // POST /api/plans/upgrade ...
+      // Se o plano já estiver selecionado, o botão estará desabilitado (:disabled="plan.selected").
+      // Esta verificação é uma segurança adicional.
+      if (plan.selected) {
+        return;
+      }
+
+      // Redireciona o usuário para a página de pagamento.
+      // A aba atual será alterada para esta URL.
+      const paymentUrl = 'https://pay.kiwify.com.br/VxMIdHr';
+      window.location.href = paymentUrl;
+
+      // Qualquer lógica de backend para registrar a intenção de upgrade ou
+      // lidar com o status do plano geralmente ocorreria APÓS uma confirmação
+      // de pagamento bem-sucedida vinda da Kiwify (por exemplo, via webhook
+      // para o seu backend ou um redirecionamento da Kiwify de volta para o seu site
+      // com um status de transação).
+      // console.log(`Redirecionando para pagamento do plano ${plan.id}: ${paymentUrl}`);
     },
   },
 }
