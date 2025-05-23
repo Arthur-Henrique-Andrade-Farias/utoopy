@@ -81,7 +81,7 @@ const redefinirSenha = async () => {
     message.value = response.data.message + " Você será redirecionado para o login.";
     isError.value = false;
     setTimeout(() => {
-      router.push('/login');
+      router.push('/');
     }, 3000); // Redireciona após 3 segundos
   } catch (error) {
     console.error('Erro ao redefinir senha:', error);
@@ -93,7 +93,7 @@ const redefinirSenha = async () => {
 };
 
 const voltarParaLogin = () => {
-  router.push('/login');
+  router.push('/');
 };
 </script>
 
@@ -187,7 +187,7 @@ button {
     cursor: pointer;
     margin-bottom: 15px;
     color: white;
-    background-color: #4E4794;
+    background-color: black;
     font-family: 'Roboto', sans-serif;
 }
 button:disabled {

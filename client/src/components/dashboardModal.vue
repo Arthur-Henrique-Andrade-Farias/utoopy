@@ -52,7 +52,7 @@ onMounted(async () => {
 
   } catch (e) {
     console.error(e);
-    router.push('/login');
+    router.push('/');
   }
 });
 
@@ -67,7 +67,7 @@ const canShowAnalytics = computed(() => level.value === 'gold');
     <h2>GoToMarket – Dashboard</h2>
 
     <img src="@/assets/home/market.svg"  class="market-icon"      @click="$router.push('/plans')" />
-    <img src="@/assets/home/arrow_back.svg" class="back-arrow-icon" @click="$router.push('/login')" />
+    <img src="@/assets/home/arrow_back.svg" class="back-arrow-icon" @click="$router.push('/')" />
 
     <div class="cards">
       <!-- ----- POSTAGENS ----- -->

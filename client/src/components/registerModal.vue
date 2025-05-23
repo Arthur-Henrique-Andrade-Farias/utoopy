@@ -1,6 +1,6 @@
 <template>
   <div class="register-modal">
-    <img class="arrow-back" src="@/assets/register/arrow_back.svg" alt="Voltar" @click="$router.push('/login')" />
+    <img class="arrow-back" src="@/assets/register/arrow_back.svg" alt="Voltar" @click="$router.push('/')" />
     <img class="person-icon" src="@/assets/register/person.svg" alt="padlock" />
     <h2>Registrar na Plataforma</h2>
     <div class="input-group">
@@ -41,7 +41,7 @@ const registrar = async () => {
 
     localStorage.setItem('token', data.token);
     alert('Conta criada com sucesso! Faça login.');
-    router.push('/login');                         // 👈 redireciona
+    router.push('/');                         // 👈 redireciona
   } catch (err) {
     alert(err.response?.data?.msg || 'Erro ao registrar');
   }
@@ -143,7 +143,7 @@ button {
     cursor: pointer;
     margin-bottom: 100px;
     color: white;
-    background-color: #4E4794;
+    background-color: black;
     font-family: 'Roboto', sans-serif;
 
 }

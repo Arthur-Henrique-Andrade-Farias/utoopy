@@ -1,6 +1,6 @@
 <template>
   <div class="forgotPass-modal">
-    <img class="arrow-back" src="@/assets/register/arrow_back.svg" alt="Voltar" @click="$router.push('/login')" />
+    <img class="arrow-back" src="@/assets/register/arrow_back.svg" alt="Voltar" @click="$router.push('/')" />
     <img class="person-icon" src="@/assets/register/person.svg" alt="Ícone de cadeado" /> <h2>Esqueceu a Senha</h2>
     <div class="input-group">
       <input id="email" type="email" v-model="email" placeholder="Email" @keyup.enter="solicitarCodigo" />
@@ -162,7 +162,7 @@ button {
     cursor: pointer;
     margin-bottom: 15px; /* Ajustado */
     color: white;
-    background-color: #4E4794;
+    background-color: black;
     font-family: 'Roboto', sans-serif;
 }
 
