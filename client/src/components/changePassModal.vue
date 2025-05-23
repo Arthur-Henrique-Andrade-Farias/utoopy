@@ -73,7 +73,7 @@ const redefinirSenha = async () => {
   isError.value = false;
 
   try {
-    const response = await axios.post('http://localhost:3000/api/reset-password', {
+    const response = await axios.post('https://utoopy-backend.onrender.com/api/reset-password', {
       email: email.value,
       token: code.value,
       newPassword: password.value,

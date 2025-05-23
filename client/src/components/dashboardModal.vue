@@ -18,7 +18,7 @@ const analMocked   = ref(false);
 onMounted(async () => {
   const token = localStorage.getItem('token');
   try {
-    const { data } = await axios.get('http://localhost:3000/api/home', {
+    const { data } = await axios.get('https://utoopy-backend.onrender.com/api/home', {
       headers: { Authorization: `Bearer ${token}` }
     });
 

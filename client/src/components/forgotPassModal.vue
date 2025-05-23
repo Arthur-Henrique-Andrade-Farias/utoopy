@@ -45,7 +45,7 @@ const solicitarCodigo = async () => {
 
   try {
 // eslint-disable-next-line no-unused-vars
-    const response = await axios.post('http://localhost:3000/api/forgot-password', {
+    const response = await axios.post('https://utoopy-backend.onrender.com/api/forgot-password', {
       email: email.value,
     });
     

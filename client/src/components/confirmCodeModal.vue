@@ -79,7 +79,7 @@ const reenviarCodigo = async () => {
   isError.value = false;
   try {
     // Reutiliza a API de /api/forgot-password para reenviar
-    await axios.post('http://localhost:3000/api/forgot-password', {
+    await axios.post('https://utoopy-backend.onrender.com/api/forgot-password', {
       email: email.value,
     });
     message.value = 'Um novo código foi enviado para o seu email.';
@@ -112,7 +112,7 @@ const verificarCodigo = async () => {
   isError.value = false;
 
   try {
-    const response = await axios.post('http://localhost:3000/api/verify-recovery-code', {
+    const response = await axios.post('https://utoopy-backend.onrender.com/api/verify-recovery-code', {
       email: email.value,
       token: code.value,
     });
