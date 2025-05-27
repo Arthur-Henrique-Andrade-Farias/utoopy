@@ -403,56 +403,132 @@ h3.advise {
   }
 }
 
-/* Telas muito pequenas (celulares) */
+/* Telas muito pequenas (celulares) - Ajustes agressivos para compactação */
 @media (max-width: 480px) {
   .plans-modal {
-    padding: 15px 10px; /* Menos padding horizontal */
-    border-radius: 15px;
-    margin: 10px auto; /* Menos margem vertical */
-    min-height: 0; /* Permite que o modal seja tão pequeno quanto seu conteúdo */
+    width: 96%; /* Um pouco mais de largura para o modal em si */
+    padding: 10px 8px; /* Padding horizontal e vertical reduzidos */
+    border-radius: 10px; /* Raio da borda menor */
+    margin: 8px auto;   /* Margem superior/inferior reduzida */
+    min-height: 0;
+    height: auto;
+    max-height: 95vh; /* Mantém o limite de altura com scroll */
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   .arrow-back-icon {
-    top: 15px;
-    left: 15px;
-    width: 24px;
-    height: 24px;
-  }
-  .plans-modal h1 {
-    margin-top: 30px;
+    top: 12px;
+    left: 12px;
+    width: 22px; /* Ícone um pouco menor */
+    height: 22px;
   }
 
-
-  .container {
-    width: 95%; /* Quase largura total */
-    padding: 12px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.08); /* Sombra ainda mais sutil */
-  }
-  .container:hover {
-    transform: none; /* Remove hover effect em telas muito pequenas */
-    box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+  .plans-modal h1 { /* Título principal do Modal */
+    margin-top: 28px; /* Ajustado para o ícone e padding */
+    font-size: 18px; /* Reduzido (era ~24px, depois 20px) */
+    overflow-wrap: break-word;
+    hyphens: auto;
+    margin-bottom: 5px; /* Margem inferior reduzida */
   }
 
-
-  .container h4 {
+  .plans-modal > h2 { /* Subtítulo do Modal */
+    font-size: 13px; /* Reduzido (era ~16px, depois 14px) */
+    max-width: 100%;
+    overflow-wrap: break-word;
+    hyphens: auto;
     line-height: 1.35;
-  }
-
-  button,
-  .container button {
-    height: 40px;
+    margin-bottom: 12px; /* Margem inferior reduzida */
   }
 
   .payment-image {
-     margin-top: 10px;
-     margin-bottom: 20px;
+     width: 32px; /* Reduzido */
+     height: 32px; /* Reduzido */
+     margin-top: 8px;
+     margin-bottom: 12px; /* Margem inferior reduzida */
   }
 
-  h3.advise {
-    /* Por padrão, o texto de aviso é mantido. Se precisar esconder: */
-    /* display: none; */
-    font-size: 11px; /* Se mantido, talvez precise ser menor */
+  .container-group {
+    gap: 12px; /* Espaço entre os cards reduzido */
+    width: 100%;
+  }
+
+  .container { /* Card do Plano */
+    width: 95%; /* Largura do card dentro do modal */
+    height: auto;
+    min-height: unset;
+    padding: 10px; /* Padding interno do card reduzido */
+    box-shadow: 0 1px 2px rgba(0,0,0,0.07); /* Sombra ainda mais sutil */
+    border-radius: 8px; /* Raio da borda menor */
+    /* display: flex; flex-direction: column; justify-content: space-between; */ /* Do base */
+  }
+  .container:hover {
+    transform: none;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.07);
+  }
+
+  .container h2,
+  .container h3,
+  .container h4 {
+    overflow-wrap: break-word;
+    hyphens: auto;
+  }
+
+  /* Preço (primeiro h2 dentro do card) */
+  .container > h2:first-child {
+    font-size: 15px; /* Reduzido */
+    font-weight: bold;
+    margin-bottom: 2px; /* Bem justo */
+  }
+
+  /* Nome do Plano (h2 com classe .Bronze, .Silver, .Gold) */
+  .container h2.Bronze,
+  .container h2.Silver,
+  .container h2.Gold {
+    font-size: 16px; /* Reduzido */
+    font-weight: bold;
+    margin-top: 0;
+    margin-bottom: 8px; /* Margem inferior reduzida */
+  }
+
+  .container h3 { /* Títulos das features: AutomatePosts, etc. */
+    font-size: 12px; /* Reduzido */
+    font-weight: bold; /* Manter destaque */
+    margin-top: 8px;
+    margin-bottom: 3px; /* Bem justo */
+  }
+
+  .container h4 { /* Descrições das features */
+    font-size: 11px; /* Reduzido (era 12px) */
+    line-height: 1.3; /* Linha mais justa */
+    min-height: unset;
+    flex-grow: 1;
+    margin-bottom: 8px; /* Espaço antes do botão reduzido */
+  }
+
+  button,
+  .container button { /* Botão de Selecionar */
+    height: 36px; /* Altura reduzida (mínimo para toque pode ser comprometido) */
+    width: 90%; /* Mantém largura relativa */
+    /* max-width: 200px; */ /* Pode remover se width: 90% for suficiente */
+    font-size: 12px; /* Reduzido */
+    font-weight: bold;
+    padding: 0 8px; /* Padding interno do botão */
+    border-radius: 5px; /* Raio da borda menor */
+  }
+
+  h3.advise { /* Texto de aviso no final */
+    font-size: 10px; /* Extremamente reduzido */
+    line-height: 1.25; /* Linha mais justa */
+    padding: 0 8px; /* Padding horizontal reduzido */
+    margin-top: 12px; /* Margem superior reduzida */
+    overflow-wrap: break-word;
+    hyphens: auto;
   }
 }
+
+
 
 </style>

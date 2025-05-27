@@ -212,4 +212,90 @@ button {
   }
 
 }
+
+@media (max-width: 400px) {
+  .register-modal {
+    width: 90%; /* O modal ocupa mais largura na tela pequena */
+    max-width: 340px; /* Evita que fique excessivamente largo em telas um pouco maiores que 375px */
+    height: auto; /* Altura se ajusta ao conteúdo */
+    min-height: 480px; /* Altura mínima para acomodar o conteúdo visualizado na imagem */
+    padding: 25px 20px; /* Espaçamento interno: 25px superior/inferior, 20px laterais */
+    border-radius: 24px; /* Cantos arredondados consistentes com a imagem */
+    background-color: white; /* Fundo branco como na imagem */
+    border: 1px solid #e0e0e0; /* Borda sutil, se necessário, ou none */
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1); /* Sombra suave opcional para destaque */
+    
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centraliza itens horizontalmente */
+    justify-content: flex-start; /* Alinha o conteúdo ao topo */
+    overflow-y: auto; /* Permite rolagem se o conteúdo exceder a altura */
+  }
+
+  .arrow-back {
+    top: 25px; /* Ajuste da posição do ícone de voltar */
+    left: 20px;
+    width: 24px;
+    height: 24px;
+  }
+
+  .person-icon {
+    /* A estilização base do .person-icon (com border: 20px solid white) é um pouco usual.
+       Esta media query ajustará margens e tamanho assumindo que width/height
+       são para o círculo branco visível. */
+    margin-top: 20px; /* Espaço após o topo/padding do modal */
+    width: 50px;    /* Largura do ícone de pessoa (círculo) */
+    height: 50px;   /* Altura do ícone de pessoa (círculo) */
+    /* Se a borda de 20px do estilo base estiver ativa e causar problemas visuais,
+       você pode querer redefinir/ajustar 'border' aqui também.
+       Ex: border: none; ou border: 1px solid #ccc;
+       Para este exemplo, manteremos a estrutura da borda original, ajustando apenas o tamanho visual.
+    */
+    margin-bottom: 15px; /* Espaço abaixo do ícone de pessoa */
+  }
+
+  .register-modal h2 {
+    font-size: 22px; /* Tamanho da fonte do título "Registrar na Plataforma" */
+    line-height: 1.3; /* Altura da linha para melhor leitura */
+    color: #333;      /* Cor do título (mantendo do base) */
+    margin-bottom: 25px; /* Espaço abaixo do título */
+    margin-top: 0;
+  }
+
+  input {
+    width: 100%; /* Campos de input ocupam toda a largura disponível */
+    height: 48px; /* Altura aumentada para melhor toque */
+    font-size: 16px; /* Tamanho da fonte nos inputs */
+    padding: 10px 15px; /* Espaçamento interno dos inputs */
+    padding-left: 45px; /* Espaço à esquerda para o ícone dentro do input */
+    margin-bottom: 18px; /* Espaço entre os inputs */
+    border-radius: 8px; /* Cantos arredondados para os inputs */
+    border: 1px solid #ddd; /* Borda mais suave para os inputs */
+    box-sizing: border-box; /* Garante que padding e border não aumentem a largura total */
+  }
+
+  input[type="password"]:placeholder-shown,
+  input[type="text"]:placeholder-shown {
+    background-size: 20px 20px; /* Tamanho dos ícones de email/senha */
+    background-position: 12px center; /* Posição dos ícones */
+  }
+
+  input::placeholder {
+    text-indent: 0px; /* Remove indentação extra do placeholder, padding-left já cuida disso */
+    color: #888; /* Cor do placeholder um pouco mais suave */
+  }
+
+  button {
+    width: 100%; /* Botão ocupa toda a largura */
+    height: 50px; /* Altura do botão */
+    font-size: 18px; /* Tamanho da fonte do botão */
+    font-weight: bold;
+    margin-top: 15px; /* Espaço acima do botão */
+    margin-bottom: 0; /* Remove margem inferior, padding do modal cuidará do espaço */
+    border-radius: 8px; /* Cantos arredondados do botão */
+    background-color: black; /* Cor de fundo (mantendo do base) */
+    color: white; /* Cor do texto (mantendo do base) */
+    box-sizing: border-box;
+  }
+}
 </style>

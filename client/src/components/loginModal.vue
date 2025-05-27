@@ -213,4 +213,102 @@ button {
     font-size: 10px;
 }
 }
+
+@media (max-width: 400px) {
+  .login-modal {
+    width: 90%; /* Modal ocupa mais largura na tela */
+    max-width: 340px; /* Largura máxima para consistência */
+    height: auto; /* Altura se ajusta ao conteúdo */
+    padding: 25px 20px; /* Espaçamento interno */
+    border-radius: 24px; /* Cantos arredondados */
+    /* background-color: #f2f2f2; /* Mantém a cor de fundo original */
+    /* border: 1px solid #ccc; /* Borda original, pode ser ajustada se desejar */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start; /* Alinha conteúdo ao topo */
+    overflow-y: auto; /* Permite rolagem se necessário */
+  }
+
+  .padlock-icon {
+    width: 40px; /* Tamanho do conteúdo da imagem (SVG) */
+    height: 40px; /* Tamanho do conteúdo da imagem (SVG) */
+    /* A borda base é 'border: 20px solid white;'.
+       Reduzir 'border-width' aqui ajuda a diminuir o tamanho visual total do ícone
+       em telas pequenas, tornando-o mais proporcional.
+       Total diâmetro visual: 40px (conteúdo) + 2 * 10px (borda) = 60px.
+    */
+    border-width: 10px; 
+    margin-top: 20px; /* Margem superior ajustada */
+    margin-bottom: 20px; /* Margem inferior ajustada */
+  }
+
+  .login-modal h2 {
+    font-size: 22px; /* Tamanho do título */
+    line-height: 1.3;
+    text-align: center;
+    color: #333; /* Mantém cor original */
+    margin-bottom: 25px; /* Espaço abaixo do título */
+  }
+
+  .input-group {
+    width: 100%; /* Ocupa toda a largura do modal */
+    margin-bottom: 18px; /* Espaçamento entre os grupos de input */
+  }
+
+  /* Estilos para os inputs dentro do .input-group */
+  .input-group input {
+    width: 100%; 
+    height: 48px; /* Altura para melhor usabilidade (toque) */
+    font-size: 16px; /* Tamanho da fonte */
+    padding: 10px 15px; /* Espaçamento interno */
+    padding-left: 45px; /* Espaço para o ícone (mail/key) */
+    border-radius: 8px; /* Cantos arredondados */
+    border: 1px solid #ddd; /* Borda suave */
+    box-sizing: border-box; /* Padding e border não aumentam a largura total */
+    margin-bottom: 0; /* Margem inferior é controlada pelo .input-group */
+  }
+
+  /* Ajustes para os ícones de placeholder (já existentes no seu CSS base) */
+  /* Estes seletores aplicam-se diretamente ao input */
+  input[type="password"]:placeholder-shown,
+  input[type="text"]:placeholder-shown {
+    background-size: 20px 20px; /* Tamanho dos ícones de email/senha */
+    background-position: 12px center; /* Posição dos ícones */
+  }
+
+  input::placeholder {
+    text-indent: 0px; /* Remove indentação extra, padding-left já acomoda o ícone */
+    color: #888; /* Cor do placeholder */
+  }
+
+  button { /* Botão "Entrar" */
+    width: 100%;
+    height: 50px;
+    font-size: 18px;
+    font-weight: bold; /* Mantém negrito */
+    border-radius: 8px;
+    margin-top: 10px; /* Espaço após o último input group */
+    margin-bottom: 25px; /* Espaço antes dos .login-links */
+    /* color: white; (do base) */
+    /* background-color: black; (do base) */
+    box-sizing: border-box;
+  }
+
+  .login-links {
+    display: flex;
+    flex-direction: column; /* Links empilhados verticalmente */
+    align-items: center; /* Links centralizados */
+    width: 100%; /* Ocupa toda a largura */
+    margin-top: 0; /* Remove a margem negativa para um fluxo natural */
+    font-size: 14px; /* Tamanho da fonte dos links */
+    gap: 12px; /* Espaço entre os links empilhados */
+  }
+
+  .login-links a {
+    /* color: black; (do base) */
+    /* text-decoration: none; (do base) */
+    /* font-weight: bold; (do base) */
+  }
+}
 </style>

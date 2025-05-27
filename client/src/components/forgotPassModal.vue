@@ -226,4 +226,82 @@ p {
     font-size: 13px;
   }
 }
+
+/* Adicione ao <style scoped> do forgotPass-modal.vue */
+
+@media (max-width: 420px) {
+  .forgotPass-modal {
+    width: 95%;
+    padding: 15px 10px;
+    min-height: 0;
+    height: auto;
+    margin: 10vh auto auto auto; /* Centraliza e empurra do topo */
+    border-radius: 20px;
+    justify-content: flex-start; /* Alinha conteúdo ao topo se houver espaço extra */
+  }
+
+  .arrow-back {
+    top: 15px;
+    left: 15px;
+    width: 22px;
+    height: 22px;
+  }
+
+  .person-icon {
+    width: 36px; /* Diâmetro do círculo branco */
+    height: 36px;
+    border-width: 5px; /* Borda branca bem reduzida */
+    margin-top: 30px; /* Espaço após o ícone de voltar */
+    margin-bottom: 15px;
+  }
+
+  .forgotPass-modal h2 {
+    font-size: 20px;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .input-group {
+    width: 100%;
+  }
+
+  input[type="email"] { /* Input de Email */
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 15px;
+    height: 44px;
+    padding: 10px;
+    padding-left: 38px; /* Espaço para o ícone de email */
+    margin-bottom: 15px;
+    border-radius: 8px;
+  }
+
+  input[type="email"]:placeholder-shown {
+    background-size: 20px 20px; /* Ícone menor */
+    background-position: 10px center; /* Posição ajustada */
+  }
+
+  input::placeholder {
+    text-indent: 0; /* Placeholder alinhado após padding-left */
+  }
+
+  button { /* Botão "Enviar código" */
+    width: 100%;
+    box-sizing: border-box;
+    height: 44px;
+    font-size: 15px; /* Fonte do botão reduzida */
+    margin-bottom: 10px;
+    border-radius: 8px;
+  }
+
+  p { /* Parágrafo de mensagem */
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 12px;
+    margin-bottom: 10px;
+    line-height: 1.4;
+    min-height: 28px; /* Para 2 linhas de mensagem pequena */
+    overflow-wrap: break-word;
+  }
+}
 </style>

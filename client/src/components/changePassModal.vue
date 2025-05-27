@@ -234,4 +234,91 @@ button:disabled {
     background-size: 24px 24px !important; /* Ajuste para ícone */
   }
 }
+
+/* Adicione ao <style scoped> do changePass-modal.vue */
+
+@media (max-width: 420px) {
+  .changePass-modal {
+    width: 95%;
+    padding: 15px 10px;
+    min-height: 0;
+    height: auto;
+    margin: 10vh auto auto auto;
+    border-radius: 20px;
+    justify-content: flex-start;
+  }
+
+  .arrow-back {
+    top: 15px;
+    left: 15px;
+    width: 22px;
+    height: 22px;
+  }
+
+  .person-icon {
+    width: 36px;
+    height: 36px;
+    border-width: 5px; /* Borda branca bem reduzida */
+    margin-top: 30px;
+    margin-bottom: 15px;
+  }
+
+  .changePass-modal h2 { /* Título "Defina sua Nova Senha" */
+    font-size: 20px;
+    margin-bottom: 8px;
+    line-height: 1.3;
+  }
+
+  .subtitle { /* "Escolha uma senha forte..." */
+    font-size: 12px;
+    line-height: 1.4;
+    margin-bottom: 20px;
+    padding: 0 5px;
+    overflow-wrap: break-word;
+  }
+
+  .input-group {
+    width: 100%;
+  }
+
+  input[type="password"] { /* Inputs de Nova Senha e Confirmar Senha */
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 15px;
+    height: 44px;
+    padding: 10px;
+    padding-left: 38px; /* Espaço para o ícone de chave */
+    margin-bottom: 12px; /* Espaço entre os inputs de senha */
+    border-radius: 8px;
+  }
+
+  input[type="password"]:placeholder-shown {
+    background-size: 20px 20px; /* Ícone menor */
+    background-position: 10px center; /* Posição ajustada */
+  }
+
+  input::placeholder {
+    text-indent: 0;
+  }
+
+  button { /* Botão "Redefinir Senha" */
+    width: 100%;
+    box-sizing: border-box;
+    height: 44px;
+    font-size: 15px;
+    margin-top: 5px; /* Pequena margem acima do botão */
+    margin-bottom: 10px;
+    border-radius: 8px;
+  }
+
+  .message { /* Mensagens de sucesso/erro */
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 12px;
+    margin-bottom: 10px;
+    line-height: 1.4;
+    min-height: 28px;
+    overflow-wrap: break-word;
+  }
+}
 </style>
