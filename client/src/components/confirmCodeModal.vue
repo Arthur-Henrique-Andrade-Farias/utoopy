@@ -287,4 +287,96 @@ button:disabled {
     font-size: 18px;
   }
 }
+
+/* Adicione ao <style scoped> do confirmCode-modal.vue */
+
+@media (max-width: 420px) {
+  .confirmCode-modal {
+    width: 95%;
+    padding: 15px 10px;
+    min-height: 0;
+    height: auto;
+    margin: 10vh auto auto auto;
+    border-radius: 20px;
+    justify-content: flex-start;
+  }
+
+  .arrow-back {
+    top: 15px;
+    left: 15px;
+    width: 22px;
+    height: 22px;
+  }
+
+  .person-icon {
+    width: 36px;
+    height: 36px;
+    border-width: 5px; /* Borda branca bem reduzida */
+    margin-top: 30px;
+    margin-bottom: 15px;
+  }
+
+  .confirmCode-modal h2 { /* Título "Digite o código" */
+    font-size: 20px;
+    margin-bottom: 8px;
+    line-height: 1.3;
+  }
+
+  .subtitle { /* "Enviamos um código..." */
+    font-size: 12px;
+    line-height: 1.4;
+    margin-bottom: 20px;
+    padding: 0 5px; /* Para evitar que texto longo toque as bordas */
+    overflow-wrap: break-word;
+  }
+
+  .input-group {
+    width: 100%;
+  }
+
+  input#code { /* Input do código de 6 dígitos */
+    width: 100%;
+    max-width: 200px; /* Limita largura para melhor estética do código */
+    margin-left: auto;
+    margin-right: auto;
+    box-sizing: border-box;
+    font-size: 18px; /* Fonte maior para visibilidade do código */
+    height: 48px; /* Mais alto para facilitar a digitação */
+    padding: 10px;
+    text-align: center;
+    letter-spacing: 0.1em; /* Espaçamento entre dígitos (opcional) */
+    margin-bottom: 15px;
+    border-radius: 8px;
+  }
+  input#code::placeholder {
+    text-indent: 0;
+    text-align: center;
+    letter-spacing: normal; /* Placeholder sem espaçamento extra */
+  }
+
+  button { /* Botão "Verificar Código" */
+    width: 100%;
+    box-sizing: border-box;
+    height: 44px;
+    font-size: 15px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+  }
+
+  .message { /* Mensagens de sucesso/erro */
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 12px;
+    margin-bottom: 10px;
+    line-height: 1.4;
+    min-height: 28px;
+    overflow-wrap: break-word;
+  }
+
+  .resend-code { /* Texto "Reenviar código" */
+    font-size: 12px;
+    margin-top: 8px;
+    margin-bottom: 20px; /* Espaço no final do modal */
+  }
+}
 </style>
